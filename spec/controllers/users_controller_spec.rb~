@@ -92,6 +92,11 @@ describe "GET 'show'" do
         post :create, :user => @attr
         response.should redirect_to(user_path(assigns(:user)))
       end    
+   
+    it "devrait avoir un message de bienvenue" do
+        post :create, :user => @attr
+        flash[:success].should =~ /Bienvenue dans l'Application Exemple/i
+      end
     end
   end
 end

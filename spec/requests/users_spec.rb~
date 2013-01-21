@@ -11,8 +11,8 @@ describe "Users" do#0
           visit signup_path
           fill_in "Nom", :with => ""
           fill_in "eMail", :with => ""
-          fill_in "password", :with => ""
-          fill_in "Mot de passe de confirmation", :with => ""
+          fill_in "Mot de passe", :with => ""
+          fill_in "Confirmation mot de passe", :with => ""
           click_button
           response.should render_template('users/new')
           response.should have_selector("div#error_explanation")
@@ -37,4 +37,31 @@ describe "Users" do#0
       end#3
     end#2
   end#1
+  
+  describe "identification/deconnexion" do#1
+
+    describe "l'echec" do#2
+      it "ne devrait pas identifier l'utilisateur" do#3
+        visit signin_path
+        fill_in "eMail",    :with => ""
+        fill_in "Mot de passe", :with => ""
+        click_button
+        response.should have_selector("div.flash.error", :content => "Invalid")
+      end#3
+    end#2
+
+    describe "le succes" do#2
+      it "devrait identifier un utilisateur puis le deconnecter" do#3
+        user = Factory(:user)
+        visit signin_path
+        fill_in "eMail",    :with => user.email
+        fill_in "Mot de passe", :with => user.password
+        click_button
+        controller.should be_signed_in
+        click_link "Deconnexion"
+        controller.should_not be_signed_in
+      end#3
+    end#2
+  end#1
 end#0
+
