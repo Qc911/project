@@ -4,16 +4,16 @@ class SessionsController < ApplicationController
     @titre = "S'identifier"
   end
 
-  def create
+   def create
     user = User.authenticate(params[:session][:email],
                              params[:session][:password])
     if user.nil?
-      flash.now[:error] = "Combinaison Email/Mot de passe invalide."
+      flash.now[:error] = "Combinaison mail/mot de passe invalide."
       @titre = "S'identifier"
       render 'new'
     else
       sign_in user
-      redirect_to user
+      redirect_back_or user
     end
   end
 

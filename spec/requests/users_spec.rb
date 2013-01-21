@@ -43,10 +43,10 @@ describe "Users" do#0
     describe "l'echec" do#2
       it "ne devrait pas identifier l'utilisateur" do#3
         visit signin_path
-        fill_in "eMail",    :with => ""
+        fill_in "email",    :with => ""
         fill_in "Mot de passe", :with => ""
         click_button
-        response.should have_selector("div.flash.error", :content => "Invalid")
+        response.should have_selector("div.flash.error", :content => "Combinaison mail/mot de passe invalide.")
       end#3
     end#2
 
@@ -54,7 +54,7 @@ describe "Users" do#0
       it "devrait identifier un utilisateur puis le deconnecter" do#3
         user = Factory(:user)
         visit signin_path
-        fill_in "eMail",    :with => user.email
+        fill_in "email",    :with => user.email
         fill_in "Mot de passe", :with => user.password
         click_button
         controller.should be_signed_in
