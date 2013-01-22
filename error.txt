@@ -1,0 +1,96 @@
+...........................................................................................FF........FFF..
+
+Failures:
+
+  1) Microposts creation echec ne devrait pas creer un nouveau micro-message
+     Failure/Error: fill_in :password, :with => user.password
+     Webrat::NotFoundError:
+       Could not find field: :password
+     # ./spec/requests/microposts_spec.rb:9:in `block (2 levels) in <top (required)>'
+
+  2) Microposts creation succes devrait creer un nouveau micro-message
+     Failure/Error: fill_in :password, :with => user.password
+     Webrat::NotFoundError:
+       Could not find field: :password
+     # ./spec/requests/microposts_spec.rb:9:in `block (2 levels) in <top (required)>'
+
+  3) FriendlyForwardings devrait rediriger vers la page voulue apres identification
+     Failure/Error: fill_in :Password, :with => user.password
+     Webrat::NotFoundError:
+       Could not find field: :Password
+     # ./spec/requests/friendly_forwardings_spec.rb:10:in `block (2 levels) in <top (required)>'
+
+  4) Users Une inscription ratee ne devrait pas creer un nouvel utilisateur
+     Failure/Error: fill_in "Confirmation mot de passe", :with => ""
+     Webrat::NotFoundError:
+       Could not find field: "Confirmation mot de passe"
+     # ./spec/requests/users_spec.rb:15:in `block (5 levels) in <top (required)>'
+     # ./spec/requests/users_spec.rb:10:in `block (4 levels) in <top (required)>'
+
+  5) Users Une inscription reussie devrait creer un nouvel utilisateurr
+     Failure/Error: response.should have_selector("div.flash.success",
+       expected following output to contain a <div.flash.success>Bienvenue</div.flash.success> tag:
+       <!DOCTYPE html>
+       <html>
+       <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+       <title>Simple App du Tutoriel Ruby on Rails | Inscription</title>
+       <!--[if lt IE 9]>
+       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+       <![endif]--><link href="/stylesheets/blueprint/screen.css?1358415435" media="screen" rel="stylesheet" type="text/css">
+       <link href="/stylesheets/blueprint/print.css?1358415435" media="print" rel="stylesheet" type="text/css">
+       <!--[if lt IE 8]><link href="/stylesheets/blueprint/ie.css?1358415435" media="screen" rel="stylesheet" type="text/css" /><![endif]--><link href="/stylesheets/custom.css?1358845619" media="screen" rel="stylesheet" type="text/css">
+       <script src="/javascripts/prototype.js?1358603378" type="text/javascript"></script><script src="/javascripts/effects.js?1358603378" type="text/javascript"></script><script src="/javascripts/dragdrop.js?1358603378" type="text/javascript"></script><script src="/javascripts/controls.js?1358603378" type="text/javascript"></script><script src="/javascripts/rails.js?1358603378" type="text/javascript"></script><script src="/javascripts/application.js?1358603378" type="text/javascript"></script>
+       </head>
+       <body>
+           <div class="container">
+             <header><a href="/"><img alt="Application Exemple" class="round" src="/images/logo.png?1358615329"></a>
+         <nav class="round"><ul>
+       <li><a href="/">Accueil</a></li>
+             <li><a href="/help">Aide</a></li>
+             <li><a href="/signin">S'identifier</a></li>
+           </ul></nav></header><section class="round"><h1>Inscription</h1>
+       
+       <form accept-charset="UTF-8" action="/users" class="new_user" id="new_user" method="post">
+       <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"></div>
+           <div id="error_explanation">
+           <h2>1 error 
+               prohibited this user 
+               from being saved:</h2>
+           <p>There were problems with the following fields:</p>
+           <ul>
+       <li>Password doesn't match confirmation</li>
+           </ul>
+       </div>
+       
+         <div class="field">
+           <label for="user_nom">Nom</label><br><input id="user_nom" name="user[nom]" size="30" type="text" value="Example User">
+       </div>
+         <div class="field">
+           <label for="user_email">Email</label><br><input id="user_email" name="user[email]" size="30" type="text" value="user@example.com">
+       </div>
+         <div class="field">
+           <div class="field_with_errors"><label for="user_password">Password</label></div>
+       <br><div class="field_with_errors"><input id="user_password" name="user[password]" size="30" type="password" value="foobar"></div>
+         </div>
+         <div class="field">
+           <label for="user_password_confirmation">Confirmation</label><br><input id="user_password_confirmation" name="user[password_confirmation]" size="30" type="password" value="">
+       </div>
+         <div class="actions">
+           <input id="user_submit" name="commit" type="submit" value="Inscription">
+       </div>
+       </form>
+             </section><footer><nav class="round"><ul>
+       <li><a href="/about">À Propos</a></li>
+             <li><a href="/contact">Contact</a></li>
+             <li><a href="http://news.railstutorial.org/">News</a></li>
+             <li><a href="http://www.railstutorial.org/">Rails Tutorial</a></li>
+           </ul></nav></footer>
+       </div>
+         </body>
+       </html>
+     # ./spec/requests/users_spec.rb:33:in `block (5 levels) in <top (required)>'
+     # ./spec/requests/users_spec.rb:26:in `block (4 levels) in <top (required)>'
+
+Finished in 2.64 seconds
+106 examples, 5 failures

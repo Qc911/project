@@ -9,10 +9,10 @@ describe "Users" do#0
       it "ne devrait pas creer un nouvel utilisateur" do#3
         lambda do#4
           visit signup_path
-          fill_in "Nom", :with => ""
-          fill_in "eMail", :with => ""
-          fill_in "Mot de passe", :with => ""
-          fill_in "Confirmation mot de passe", :with => ""
+          fill_in :user_nom, :with => ""
+          fill_in :user_email, :with => ""
+          fill_in :user_password, :with => ""
+          fill_in :user_password_confirmation, :with => ""
           click_button
           response.should render_template('users/new')
           response.should have_selector("div#error_explanation")
@@ -25,10 +25,10 @@ describe "Users" do#0
       it "devrait creer un nouvel utilisateurr" do#3
         lambda do#4
           visit signup_path
-          fill_in "Nom", :with => "Example User"
-          fill_in "eMail", :with => "user@example.com"
-          fill_in "Mot de passe", :with => "foobar"
-          fill_in "Confirmation mot de passe", :with => "foobar"
+          fill_in :user_nom, :with => "Example User"
+          fill_in :user_email, :with => "user@example.com"
+          fill_in :user_password, :with => "foobar"
+          fill_in :user_password_confirmation, :with => "foobar"
           click_button
           response.should have_selector("div.flash.success",
                                         :content => "Bienvenue")

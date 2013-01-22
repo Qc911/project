@@ -131,23 +131,77 @@ describe User do#0
     end#3
   end#2
 
-  describe "Attribut admin" do
+  describe "Attribut admin" do#2
 
-    before(:each) do
+    before(:each) do#3
       @user = User.create!(@attr)
-    end
+    end#3
 
-    it "devrait confirmer l'existence de `admin`" do
+    it "devrait confirmer l'existence de `admin`" do#3
       @user.should respond_to(:admin)
-    end
+    end#3
 
-    it "ne devrait pas etre un administrateur par défaut" do
+    it "ne devrait pas etre un administrateur par defaut" do#3
       @user.should_not be_admin
-    end
+    end#3
 
-    it "devrait pouvoir devenir un administrateur" do
+    it "devrait pouvoir devenir un administrateur" do#3
       @user.toggle!(:admin)
       @user.should be_admin
-    end
-  end
-end
+    end#3
+  end#2
+
+  describe "les associations au micro-message" do#2
+
+    before(:each) do#3
+      @user = User.create(@attr)
+    end#3
+
+    it "devrait avoir un attribut 'microposts'" do#3
+      @user.should respond_to(:microposts)
+    end#3
+  end#2
+
+  describe "micropost associations" do#2
+
+    before(:each) do#3
+      @user = User.create(@attr)
+      @mp1 = Factory(:micropost, :user => @user, :created_at => 1.day.ago)
+      @mp2 = Factory(:micropost, :user => @user, :created_at => 1.hour.ago)
+    end#3
+
+    it "devrait avoir un attribut `microposts`" do#3
+      @user.should respond_to(:microposts)
+    end#3
+
+    it "devrait avoir les bons micro-messags dans le bon ordre" do#3
+      @user.microposts.should == [@mp2, @mp1]
+    end#3
+  
+    it "devrait detruire les micro-messages associes" do#3
+      @user.destroy
+      [@mp1, @mp2].each do |micropost|#4
+        Micropost.find_by_id(micropost.id).should be_nil
+      end#4
+    end#3
+      
+      describe "Etat de l'alimentation" do#4
+
+      it "devrait avoir une methode `feed`" do#5
+        @user.should respond_to(:feed)
+      end#5
+
+      it "devrait inclure les micro-messages de l'utilisateur" do#5
+        @user.feed.include?(@mp1).should be_true
+        @user.feed.include?(@mp2).should be_true
+      end#5
+
+      it "ne devrait pas inclure les micro-messages d'un autre utilisateur" do#5
+        mp3 = Factory(:micropost,
+                      :user => Factory(:user, :email => Factory.next(:email)))
+        @user.feed.include?(mp3).should be_false
+        end#5
+      end#4
+    end#3
+  
+end#0
